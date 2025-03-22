@@ -1,2 +1,44 @@
 This is the main notetaking file for this repo.
 
+Unique conventions:
+    - Boolean types in Win32API are integers, and distinct from C++ booleans.
+    - Pointer types are named by their type, and prefixed with either P or LP e.g. LPRECT is a long-pointer to a rect.
+    - wchar_t is the typedef for a wide character. It supports UTF-16 encoding. Prefix a C-style string with L to make it wide e.g. wchar_t* str { L"Hello" };
+    - 
+
+Basic window notes:
+    - All window elements are themselves windows
+    - Some windows are main application windows, which contain other windows inside themselves e.g. buttons
+    - Some windows occupy a owner-owned relationship, like with dialog boxes. The dialog will minimize, be destroyed with, and appear in front of its owner.
+    - Windows that are elements of parent windows e.g. <Parent>Main application -> <Child>Button will move with their parents etc.
+
+Window handles:
+    - Windows are not themselves accessed by code. They are instead stored in a kind of system-wide table of created windows.
+    - They are manipulated in code by window handles, created and returned by CreateWindow(Ex)
+    - Window handles use the HWND typedef.
+    - For example, this snippet moves a passed window by x, y xSize, ySize, repaint:
+        BOOL MoveWindow(HWND windowHandle, int x, int y, int xSize, int ySize, BOOL repaint);
+
+Window co-ordinates system:
+    - Co-ordinates are measured in device-independant pixels
+    - Co-ordinates ALWAYS start from the top left, and progress to the bottom right
+    - There are three kinds of co-ordinates:
+        - Screen co-ordinates:
+            Relative to top-left of entire monitor
+        - Window co-ordinates:
+            Relative to top-left of window INCLUDING toolbar, Min/Max/Close buttons etc.
+        - Client co-ordinates:
+            Relative to top-left of window EXCLUDING toolbar etc.
+
+Application entry point:
+    - (w)WinMain is the application enter point from which all code will be ran
+    - Components that are passed to WinMain include:
+        - hInstance:
+            Handle to instance/module, used to identify the exact EXE that the program is ran from
+        - hPrevInstance
+            No longer used in modern Windows applications for any reason. Will always pass zero.
+        - pCmdLine
+            Contains the command line arguments to the application as a unicode string.
+        - nCmdShow
+            Flag to indicate whether window should start (Min)(Max)imized/normal
+    - Returns an integer that serves no purpose other than a status code.
