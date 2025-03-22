@@ -4,7 +4,6 @@ Unique conventions:
     - Boolean types in Win32API are integers, and distinct from C++ booleans.
     - Pointer types are named by their type, and prefixed with either P or LP e.g. LPRECT is a long-pointer to a rect.
     - wchar_t is the typedef for a wide character. It supports UTF-16 encoding. Prefix a C-style string with L to make it wide e.g. wchar_t* str { L"Hello" };
-    - 
 
 Basic window notes:
     - All window elements are themselves windows
@@ -42,3 +41,8 @@ Application entry point:
         - nCmdShow
             Flag to indicate whether window should start (Min)(Max)imized/normal
     - Returns an integer that serves no purpose other than a status code.
+
+CMake Notes:
+    - Must set CMAKE_CXX_FLAGS with -municode to compile Win32 windows applications.
+    - 
+     
