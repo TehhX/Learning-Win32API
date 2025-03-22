@@ -1,0 +1,9 @@
+# VSCode folder
+.vscode/
+
+# Builds
+*/build/
+
+# Misc executable files
+*.out
+*.exe
