@@ -1,9 +1,13 @@
 # VSCode folder
 .vscode/
 
-# Builds
-*/build/
+# Build folders
+**/build/
 
 # Misc executable files
 *.out
 *.exe
+
+# Shell and batch files
+*.sh
+*.bat
